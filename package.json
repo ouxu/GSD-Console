@@ -5,7 +5,8 @@
     "build": "cross-env UMI_ENV=prod umi build",
     "test": "umi test",
     "lint": "eslint --ext .js src mock tests",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "now-build": "npm run build"
   },
   "dependencies": {
     "antd": "^3.19.2",
