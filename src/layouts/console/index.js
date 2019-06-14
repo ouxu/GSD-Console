@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Layout } from 'antd';
+import { Layout, Icon } from 'antd';
+import { GlobalFooter } from 'ant-design-pro';
 import styles from './index.less';
 import SiderBar from './sider';
 import Header from './header';
@@ -15,15 +16,16 @@ const BasicLayout = props => {
       <SiderBar collapsed={collapsed} />
       <Layout>
         <Header collapsed={collapsed} onTrigger={onTrigger} />
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            background: '#fff',
-            minHeight: 280,
-          }}
-        >
+        <Content>
           {props.children}
+          <GlobalFooter
+            copyright={
+              <div>
+                Copyright <Icon type="copyright" /> {new Date().getFullYear()} Design By
+                <a href="https://outxu.cn"> John.Xu</a>
+              </div>
+            }
+          />
         </Content>
       </Layout>
     </Layout>

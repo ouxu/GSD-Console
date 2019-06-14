@@ -4,7 +4,7 @@ import { formatMessage, FormattedMessage } from 'umi/locale';
 import { Redirect } from 'react-router-dom';
 
 import HeaderSearch from 'components/HeaderSearch';
-import SelectLang from 'components/SelectLang';
+// import SelectLang from 'components/SelectLang';
 import HeaderDropdown from 'components/HeaderDropdown';
 
 import { UserContext } from 'contexts/';
@@ -14,7 +14,6 @@ import styles from './index.less';
 const { Header } = Layout;
 
 const HeaderBar = memo(props => {
-  console.log('props: ', props);
   const { collapsed = false, onTrigger } = props;
   const { user, logout } = useContext(UserContext);
   if (!user.id) {

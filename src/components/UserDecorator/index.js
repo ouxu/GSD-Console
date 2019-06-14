@@ -25,6 +25,8 @@ export default WrappedComponent => {
     initUser = () => {
       tRequest('/user/info/me').then(res => {
         if (res.success) {
+          const user = res.data;
+          user.avatar = user.avatar || '/favicon.ico';
           this.setState({ user: res.data, loading: false });
           router.replace('/console/home');
         } else {
