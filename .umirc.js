@@ -23,7 +23,7 @@ export default {
         routes: {
           exclude: [
             /model\.(j|t)sx?$/,
-            /service\.(j|t)sx?$/,
+            /services\.(j|t)sx?$/,
             /models\//,
             /components\//,
             /services\//,

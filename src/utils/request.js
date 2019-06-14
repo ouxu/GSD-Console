@@ -1,17 +1,10 @@
 import { extend } from 'umi-request';
-import message from './message';
-
-const token = window.localStorage.getItem('gsd-token');
-
-const defaultOptions = {
-  maxCache: 10,
-  prefix: 'http://127.0.0.1:3003/api',
-};
+import { defaultOptions } from 'configs/api';
 
 export const tRequest = extend({
   ...defaultOptions,
   headers: {
-    token,
+    token: window.localStorage.getItem('gsd-token'),
   },
 });
 

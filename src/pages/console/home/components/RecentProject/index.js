@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, Avatar } from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import withInit from 'components/InitDecorator';
 import { getProjects } from '../../../project/services';
 import styles from '../../style.less';
 
-const RecentProject = () => {
-  const [projects, setProject] = useState([]);
-  console.log('projects: ', projects);
-
-  useEffect(() => {
-    const initProject = async () => {
-      const res = await getProjects();
-      if (res && res.success && res.data) {
-        setProject(res.data.list.slice(0, 6));
-      }
+const init = async () => {
+  const res = await getProjects();
+  if (res && res.success && res.data) {
+    return {
+      projects: res.data.list.slice(0, 6),
     };
-    initProject();
-  }, []);
+  }
+  return {};
+};
+
+const RecentProject = (props) => {
+  const { projects = [] } = props;
 
   return (
     <Card
@@ -35,7 +35,7 @@ const RecentProject = () => {
               title={
                 <div className={styles.cardTitle}>
                   <Avatar size="small" src={item.logo || '/favicon.ico'} />
-                  <Link to={'/project/' + item.id}>{item.name}</Link>
+                  <Link to={'/console/project/' + item.id}>{item.name}</Link>
                 </div>
               }
               description={item.description}
@@ -55,4 +55,4 @@ const RecentProject = () => {
   );
 };
 
-export default RecentProject;
+export default withInit(init)(RecentProject);

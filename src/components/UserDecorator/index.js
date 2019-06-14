@@ -28,22 +28,25 @@ export default WrappedComponent => {
           const user = res.data;
           user.avatar = user.avatar || '/favicon.ico';
           this.setState({ user: res.data, loading: false });
-          router.replace('/console/home');
+          const { pathname = '' } = this.props.location;
+          if (pathname === '/login') {
+            router.replace('/console/home');
+          }
         } else {
           this.setState({ user: {}, loading: false });
         }
       });
     };
 
-    login = data => {
-      request.post('/user/login/', { data }).then(res => {
+    login = async data => {
+      await request.post('/user/login/', { data }).then(res => {
         if (res.success) {
           this.setState({ user: res.data });
           window.localStorage.setItem('gsd-token', res.data.token);
           setTimeout(() => {
             router.push('/console/home');
             message.success('登录成功');
-          });
+          }, 1000);
         } else {
           message.error(res.message);
         }

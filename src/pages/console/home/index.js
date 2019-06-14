@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, List, Avatar } from 'antd';
 import { UserContext } from 'contexts/';
 import { quickOp } from 'configs/home';
-import PageHeaderWrapper from './components/PageHeaderWrapper';
+import PageHeaderWrapper from 'components/PageHeaderWrapper';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import RecentProject from './components/RecentProject';
 
