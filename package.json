@@ -9,9 +9,13 @@
     "now-build": "npm run build"
   },
   "dependencies": {
+    "ant-design-pro": "^2.1.1",
     "antd": "^3.19.2",
+    "dva": "^2.4.0",
     "lodash-decorators": "^6.0.1",
+    "moment": "^2.22.2",
     "notie": "^4.3.1",
+    "prop-types": "^15.5.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "umi-request": "^1.0.8"
