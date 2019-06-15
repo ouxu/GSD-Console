@@ -1,6 +1,6 @@
 const defaultOptions = {
   maxCache: 0,
-  prefix: 'http://123.207.155.26:3003/api',
+  prefix: 'https://gsd-serve.ouxu.now.sh/api',
 };
 
 export { defaultOptions };
