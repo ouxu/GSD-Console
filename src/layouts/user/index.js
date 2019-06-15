@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import styles from './index.less';
 import logo from 'images/logo-full.png';

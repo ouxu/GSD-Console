@@ -45,9 +45,7 @@ const Add = props => {
               rules: [{ required: true, message: '请输入密码' }],
             })(<TextArea />)}
           </Form.Item>
-          <Form.Item label="项目成员">
-            {getFieldDecorator('users')(<UserMentions />)}
-          </Form.Item>
+          <Form.Item label="项目成员">{getFieldDecorator('users')(<UserMentions />)}</Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={loading}>
               创建

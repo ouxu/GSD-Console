@@ -1,9 +1,6 @@
 import React, { PureComponent, createElement } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
 import styles from './index.less';
-
-// TODO: 添加逻辑
 
 class EditableLinkGroup extends PureComponent {
   static propTypes = {
@@ -19,7 +16,7 @@ class EditableLinkGroup extends PureComponent {
   };
 
   render() {
-    const { links, linkElement, onAdd } = this.props;
+    const { links, linkElement } = this.props;
     return (
       <div className={styles.linkGroup}>
         {links.map(link =>
@@ -30,8 +27,8 @@ class EditableLinkGroup extends PureComponent {
               to: link.href,
               href: link.href,
             },
-            link.title
-          )
+            link.title,
+          ),
         )}
       </div>
     );

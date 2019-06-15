@@ -16,4 +16,8 @@ const editProject = data => {
   return request.post('/project/update', { data });
 };
 
-export { getProjects, getProject, createProject, editProject };
+const getInstances = params => {
+  return request.get('/instance', { params });
+};
+
+export { getProjects, getProject, createProject, editProject, getInstances };

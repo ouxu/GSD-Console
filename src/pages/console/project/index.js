@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, List, Typography, Button, Icon } from 'antd';
+import router from 'umi/router';
+import { Card, List, Typography, Button, Icon, Input } from 'antd';
 import PageHeaderWrapper from 'components/PageHeaderWrapper';
 import { Ellipsis } from 'ant-design-pro';
 import styles from './index.less';
@@ -11,7 +12,8 @@ import withInit from 'components/InitDecorator';
 const { Title } = Typography;
 
 const init = async props => {
-  const res = await getProjects();
+  const { keyword = '' } = props.location.query;
+  const res = await getProjects({ keyword });
   if (res && res.success && res.data) {
     return {
       projects: res.data,
@@ -23,8 +25,23 @@ const init = async props => {
   };
 };
 const Project = props => {
-  const { projects = {} } = props;
+  const { projects = {}, location, loading } = props;
+  const { keyword = '' } = location.query;
 
+  const onKeywordChange = e => {
+    router.replace({
+      pathname: location.pathname,
+      query: {
+        keyword: e.target.value,
+      },
+    });
+  };
+  const onReset = () => {
+    router.replace({
+      pathname: location.pathname,
+    });
+    props.reInit();
+  };
   const list = projects.list || [];
   const content = (
     <div className={styles.pageHeaderContent}>
@@ -59,7 +76,22 @@ const Project = props => {
   return (
     <PageHeaderWrapper content={content} extraContent={extraContent}>
       <div className={styles.cardList}>
+        <Card className={styles.filterBar} bodyStyle={{ margin: 0, padding: 0 }}>
+          <Input
+            defaultValue={keyword}
+            onBlur={onKeywordChange}
+            className={styles.filterKeyword}
+            placeholder="请输入关键词"
+          />
+          <Button onClick={props.reInit} type="primary" style={{marginRight: 8}}>
+            搜索
+          </Button>
+          <Button onClick={onReset}>
+            重置
+          </Button>
+        </Card>
         <List
+          loading={loading}
           rowKey="id"
           grid={{ gutter: 24, lg: 3, md: 2, sm: 1, xs: 1 }}
           dataSource={['', ...list]}
@@ -70,8 +102,8 @@ const Project = props => {
                   hoverable
                   className={styles.card}
                   actions={[
-                    <Link to={'/console/project' + item.id}>管理项目</Link>,
-                    <Link to={'/console/project/edit?id=' + item.id}>修改项目</Link>,
+                    <Link to={'/console/project/' + item.id}>管理项目实例</Link>,
+                    <Link to={'/console/project/edit?id=' + item.id}>修改项目信息</Link>,
                   ]}
                 >
                   <Card.Meta
@@ -107,4 +139,4 @@ const Project = props => {
   );
 };
 
-export default withInit(init)(Project);
+export default withInit(init, true)(Project);

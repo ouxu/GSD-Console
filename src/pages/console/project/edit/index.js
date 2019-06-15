@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, Input, Card } from 'antd';
-import { Result } from 'ant-design-pro';
-import { Link } from 'react-router-dom';
 import sleep from 'utils/sleep';
 import message from 'utils/message';
 import UserMentions from 'components/UserMentions';
@@ -23,6 +21,7 @@ const init = async props => {
   return {
     error: true,
     errorMsg: res.message,
+    errorTitle: '项目信息获取失败',
   };
 };
 
@@ -63,7 +62,11 @@ const Edit = props => {
               initialValue: project.description,
             })(<TextArea />)}
           </Form.Item>
-          <Form.Item label="项目成员">{getFieldDecorator('users')(<UserMentions />)}</Form.Item>
+          <Form.Item label="项目成员">
+            {getFieldDecorator('users', {
+              initialValue: project.users ? project.users.map(e => '' + e.id) : [],
+            })(<UserMentions users={project.users} />)}
+          </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={loading}>
               修改

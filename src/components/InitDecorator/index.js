@@ -4,7 +4,7 @@ import { Button, Card } from 'antd';
 import { Result } from 'ant-design-pro';
 import router from 'umi/router';
 
-export default request => WrappedComponent => {
+export default (request, disableLoading) => WrappedComponent => {
   class HocComponent extends Component {
     state = {
       loading: true,
@@ -14,26 +14,27 @@ export default request => WrappedComponent => {
     }
 
     init = () => {
+      disableLoading && this.setState({ loading: true });
       request(this.props).then(data => this.setState({ ...data, loading: false }));
     };
     goHome = () => {
-      router.push('/console/home')
-    }
+      router.push('/console/home');
+    };
     onRefresh = () => {
-      window.history.go()
-    }
+      window.history.go();
+    };
     render() {
-      if (this.state.loading) {
+      if (!disableLoading && this.state.loading) {
         return <Loading />;
       }
-      const { error = false, errorMsg = '' } = this.state;
+      const { error = false, errorMsg = '', errorTitle } = this.state;
 
       if (error) {
         return (
           <Card bordered={false}>
             <Result
               type="error"
-              title="项目信息获取失败"
+              title={errorTitle || '未知错误'}
               description={errorMsg}
               actions={[
                 <Button type="primary" onClick={this.goHome}>

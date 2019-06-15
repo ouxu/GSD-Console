@@ -9,7 +9,9 @@ const avatarStyle = { width: 20, height: 20 };
 export class UserMention extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      users: props.users
+    };
     this.loadUsers = debounce(this.loadUsers, 800);
   }
 

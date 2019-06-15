@@ -4,7 +4,13 @@ import Link from 'umi/link';
 import { PageHeader } from 'ant-design-pro';
 import styles from './index.less';
 
-const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, ...restProps }) => (
+const PageHeaderWrapper = ({
+  children,
+  contentWidth,
+  wrapperClassName,
+  bodyStyle,
+  ...restProps
+}) => (
   <div className={wrapperClassName}>
     <PageHeader
       wide={contentWidth === 'Fixed'}
@@ -19,7 +25,11 @@ const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, ...restPr
         return item.title;
       }}
     />
-    {children ? <div className={styles.content}>{children}</div> : null}
+    {children ? (
+      <div className={styles.content} style={bodyStyle}>
+        {children}
+      </div>
+    ) : null}
   </div>
 );
 
