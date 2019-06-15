@@ -44,7 +44,7 @@ export default WrappedComponent => {
           this.setState({ user: res.data });
           window.localStorage.setItem('gsd-token', res.data.token);
           setTimeout(() => {
-            router.push('/console/home');
+            window.location.href = '/console/home';
             message.success('登录成功');
           }, 1000);
         } else {

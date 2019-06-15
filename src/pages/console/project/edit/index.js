@@ -39,7 +39,7 @@ const Edit = props => {
         if (res.success) {
           message.success('项目信息修改成功');
         } else {
-          message.success(res.message);
+          message.error(res.message);
         }
         await sleep(500);
         setLoading(false);
@@ -52,13 +52,13 @@ const Edit = props => {
         <Form onSubmit={handleSubmit} className={styles.formWrap}>
           <Form.Item label="项目名称">
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入用户名' }],
+              rules: [{ required: true, message: '请输入项目名称' }],
               initialValue: project.name,
             })(<Input />)}
           </Form.Item>
           <Form.Item label="项目描述">
             {getFieldDecorator('description', {
-              rules: [{ required: true, message: '请输入密码' }],
+              rules: [{ required: true, message: '请输入项目描述' }],
               initialValue: project.description,
             })(<TextArea />)}
           </Form.Item>

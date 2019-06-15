@@ -37,12 +37,12 @@ const Add = props => {
         <Form onSubmit={handleSubmit} className={styles.formWrap}>
           <Form.Item label="项目名称">
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入用户名' }],
+              rules: [{ required: true, message: '请输入项目名称' }],
             })(<Input />)}
           </Form.Item>
           <Form.Item label="项目描述">
             {getFieldDecorator('description', {
-              rules: [{ required: true, message: '请输入密码' }],
+              rules: [{ required: true, message: '请输入项目描述' }],
             })(<TextArea />)}
           </Form.Item>
           <Form.Item label="项目成员">{getFieldDecorator('users')(<UserMentions />)}</Form.Item>
